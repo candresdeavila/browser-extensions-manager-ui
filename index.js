@@ -1,6 +1,6 @@
-import './index.css'
+import './src/index.css'
 
-import { renderLayout } from './components/layaout.js'
+import { renderLayout } from './src/shared/components/layaout.js'
 
 
 // Obtén el contenedor raíz
