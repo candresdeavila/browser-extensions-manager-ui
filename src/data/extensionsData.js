@@ -26,5 +26,33 @@ export const extensions = [
     description: "Organizes browser tabs into customizable groups and sessions.",
     icon: "./logo-tab-master-pro.svg",
     active: false
+  },
+  {
+    id: 5,
+    name: "MarkupNotes",
+    description: "Enables annotations and notes directly onto web pages for collaborative debugging.",
+    icon: "./logo-markup-notes.svg",
+    active: false
+  },
+  {
+    id: 6,
+    name: "PalettePicker",
+    description: "Instantly extracts color palettes from any webpage.",
+    icon: "./logo-palette-picker.svg",
+    active: false
+  },
+  {
+    id: 7,
+    name: "LinkChecker",
+    description: "Scans and highlights broken links on any page.",
+    icon: "./logo-link-checker.svg",
+    active: false
+  },
+  {
+    id: 8,
+    name: "ConsolePlus",
+    description: "Enhances developer console with advanced filtering and logging",
+    icon: "./logo-console-plus.svg",
+    active: false
   }
 ]
