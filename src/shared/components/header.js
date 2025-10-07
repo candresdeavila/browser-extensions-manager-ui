@@ -1,3 +1,5 @@
+import { toggleDarkMode } from '../utils/darkmode.js'
+
 export function renderHeader(root) {
   root.innerHTML = `
     <div class="w-[70%] max-w-6xl mx-auto 
@@ -13,8 +15,7 @@ export function renderHeader(root) {
       <!-- Dark mode toggle -->
       <button 
         id="darkModeToggle" 
-        class="p-2 rounded-xl bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition"
-      >
+        class="p-2 rounded-xl bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition">
         🌙
       </button>
     </div>
@@ -22,7 +23,5 @@ export function renderHeader(root) {
 
   // Dark mode toggle logic
   const toggleBtn = root.querySelector('#darkModeToggle')
-  toggleBtn.addEventListener('click', () => {
-    document.documentElement.classList.toggle('dark')
-  })
+  toggleBtn.addEventListener('click', toggleDarkMode)
 }

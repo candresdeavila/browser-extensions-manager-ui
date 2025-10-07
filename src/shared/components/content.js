@@ -30,6 +30,8 @@ export function renderContent(root) {
 
   // --- State
   let items = loadState()
+
+  console.log(items)
   let currentFilter = 'all'
 
   const grid = root.querySelector('#extensionsGrid')
