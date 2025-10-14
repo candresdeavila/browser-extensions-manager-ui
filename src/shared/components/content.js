@@ -1,6 +1,6 @@
 // src/shared/components/content.js
-import { extensions } from '../../data/extensionsData.js'   // ajusta si tu data está en otra carpeta
-import { renderCard } from '../../screens/card.js'          // ajusta si card.js está en otra ruta
+import extensions from '../../data/extensions.json'
+import { renderCard } from '../../screens/card.js'          
 
 const STORAGE_KEY = 'extensions_state_v1'
 
@@ -30,9 +30,8 @@ export function renderContent(root) {
 
   // --- State
   let items = loadState()
-
-  console.log(items)
   let currentFilter = 'all'
+  let searchTerm = '' // <-- nuevo estado para búsqueda
 
   const grid = root.querySelector('#extensionsGrid')
   const filterBtns = root.querySelectorAll('.filter-btn')
@@ -42,10 +41,31 @@ export function renderContent(root) {
 
   // --- Helpers
   function getFiltered() {
-    if (currentFilter === 'all') return items
-    if (currentFilter === 'active') return items.filter(i => i.active)
-    return items.filter(i => !i.active)
+  // 1) aplica filtro por active/inactive
+  let list = []
+  if (currentFilter === 'all') list = items
+  else if (currentFilter === 'active') list = items.filter(i => i.active)
+  else list = items.filter(i => !i.active)
+
+  // 2) aplica filtro por término de búsqueda (si existe)
+  if (searchTerm && searchTerm.length > 0) {
+    const q = searchTerm.toLowerCase()
+    list = list.filter(i => {
+      // busca en nombre (puedes añadir description u otros campos)
+      return i.name.toLowerCase().includes(q)
+    })
   }
+
+  return list
+}
+
+// listener global para recibir eventos de búsqueda desde header
+window.addEventListener('search', (e) => {
+  searchTerm = (e && e.detail) ? String(e.detail).trim() : ''
+  // si quieres, resetea al filtro 'all' cuando se busque:
+  // currentFilter = 'all'
+  renderGrid()
+})
 
   function renderGrid() {
     const list = getFiltered()

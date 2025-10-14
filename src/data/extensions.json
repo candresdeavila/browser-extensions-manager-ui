@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "name": "DevLens",
+    "description": "Quickly inspect page layouts and visualize element boundaries.",
+    "icon": "./logo-devlens.svg",
+    "active": true
+  },
+  {
+    "id": 2,
+    "name": "StyleSpy",
+    "description": "Instantly analyze and copy CSS from any webpage element.",
+    "icon": "./logo-style-spy.svg",
+    "active": true
+  },
+  {
+    "id": 3,
+    "name": "JSONWizard",
+    "description": "Formats, validates, and prettifies JSON responses in-browser.",
+    "icon": "./logo-json-wizard.svg",
+    "active": false
+  },
+  {
+    "id": 4,
+    "name": "TabMasterPro",
+    "description": "Organizes browser tabs into customizable groups and sessions.",
+    "icon": "./logo-tab-master-pro.svg",
+    "active": false
+  },
+  {
+    "id": 5,
+    "name": "MarkupNotes",
+    "description": "Enables annotations and notes directly onto web pages for collaborative debugging.",
+    "icon": "./logo-markup-notes.svg",
+    "active": false
+  },
+  {
+    "id": 6,
+    "name": "PalettePicker",
+    "description": "Instantly extracts color palettes from any webpage.",
+    "icon": "./logo-palette-picker.svg",
+    "active": false
+  },
+  {
+    "id": 7,
+    "name": "LinkChecker",
+    "description": "Scans and highlights broken links on any page.",
+    "icon": "./logo-link-checker.svg",
+    "active": false
+  },
+  {
+    "id": 8,
+    "name": "ConsolePlus",
+    "description": "Enhances developer console with advanced filtering and logging",
+    "icon": "./logo-console-plus.svg",
+    "active": false
+  }
+]
