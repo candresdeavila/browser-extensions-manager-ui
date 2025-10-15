@@ -1,6 +1,6 @@
 import './src/index.css'
 
-import { renderLayout } from './src/shared/components/layaout.js'
+import { renderLayout } from './src/shared/components/layout/AppLayout.js'
 import { initializeDarkMode } from './src/shared/utils/darkmode.js'
 
 // Initialize dark mode before rendering

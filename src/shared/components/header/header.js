@@ -1,5 +1,5 @@
 // src/shared/components/header.js
-import { toggleDarkMode } from '../utils/darkmode.js'
+import { toggleDarkMode } from '../../utils/darkmode.js'
 
 export function renderHeader(root) {
   root.innerHTML = `

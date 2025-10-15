@@ -1,6 +1,6 @@
 // src/shared/components/content.js
-import extensions from '../../data/extensions.json'
-import { renderCard } from '../../screens/card.js'          
+import extensions from '../../../data/extensions.json'
+import { renderCard } from '../card/card.js'          
 
 const STORAGE_KEY = 'extensions_state_v1'
 

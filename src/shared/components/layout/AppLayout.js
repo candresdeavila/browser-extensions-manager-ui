@@ -1,5 +1,5 @@
-import { renderHeader } from './header.js'
-import { renderContent } from './content.js'
+import { renderHeader } from '../header/header.js'
+import { renderContent } from '../content/content.js'
 
 export function renderLayout(root) {
   root.innerHTML = `
