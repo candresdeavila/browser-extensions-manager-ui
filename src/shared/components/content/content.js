@@ -6,18 +6,18 @@ const STORAGE_KEY = 'extensions_state_v1'
 
 export function renderContent(root) {
   root.innerHTML = `
-    <div class="max-w-6xl mx-auto w-[70%] mt-10 mb-10">
-      <div class="flex justify-between items-center mb-6">
+    <div class="max-w-6xl mx-auto w-[90%] md:w-[70%] mt-10 mb-10">
+      <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4 sm:gap-0">
         <!-- Title -->
         <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">
           Extension List
         </h2>
 
         <!-- Filter buttons -->
-        <div class="flex gap-3">
-          <button class="filter-btn px-4 py-2 rounded-full" data-filter="all">All</button>
-          <button class="filter-btn px-4 py-2 rounded-full" data-filter="active">Active</button>
-          <button class="filter-btn px-4 py-2 rounded-full" data-filter="inactive">Inactive</button>
+        <div class="flex flex-wrap justify-center sm:justify-end gap-2 sm:gap-3 w-full sm:w-auto">
+          <button class="filter-btn px-3 sm:px-4 py-2 rounded-full text-sm sm:text-base min-w-[80px]" data-filter="all">All</button>
+          <button class="filter-btn px-3 sm:px-4 py-2 rounded-full text-sm sm:text-base min-w-[80px]" data-filter="active">Active</button>
+          <button class="filter-btn px-3 sm:px-4 py-2 rounded-full text-sm sm:text-base min-w-[80px]" data-filter="inactive">Inactive</button>
         </div>
       </div>
 
