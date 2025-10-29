@@ -11,7 +11,7 @@ export function renderHeader(root) {
       
       <!-- Logo -->
       <div class="flex items-center">
-        <img src="./logo.svg" alt="Logo" class="w-10 h-10 sm:w-13 sm:h-13"/>
+        <img src="./logo.svg" alt="Logo" class="w-24 h-24 sm:w-32 sm:h-32 -my-8"/>
       </div>
 
       <!-- Right controls: search + darkmode -->
