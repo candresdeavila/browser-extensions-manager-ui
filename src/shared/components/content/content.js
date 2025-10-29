@@ -3,6 +3,7 @@ import extensions from '../../../data/extensions.json'
 import { renderCard } from '../card/card.js'          
 
 const STORAGE_KEY = 'extensions_state_v1'
+const FILTER_STORAGE_KEY = 'current_filter_state'
 
 export function renderContent(root) {
   root.innerHTML = `
@@ -30,7 +31,7 @@ export function renderContent(root) {
 
   // --- State
   let items = loadState()
-  let currentFilter = 'all'
+  let currentFilter = loadFilterState()
   let searchTerm = '' // <-- nuevo estado para búsqueda
 
   const grid = root.querySelector('#extensionsGrid')
@@ -39,25 +40,51 @@ export function renderContent(root) {
   // Estilos iniciales de botones
   updateFilterButtonStyles()
 
-  // --- Helpers
-  function getFiltered() {
-  // 1) aplica filtro por active/inactive
-  let list = []
-  if (currentFilter === 'all') list = items
-  else if (currentFilter === 'active') list = items.filter(i => i.active)
-  else list = items.filter(i => !i.active)
-
-  // 2) aplica filtro por término de búsqueda (si existe)
-  if (searchTerm && searchTerm.length > 0) {
-    const q = searchTerm.toLowerCase()
-    list = list.filter(i => {
-      // busca en nombre (puedes añadir description u otros campos)
-      return i.name.toLowerCase().includes(q)
-    })
+  // Función para cargar el estado del filtro
+  function loadFilterState() {
+    try {
+      const savedFilter = localStorage.getItem(FILTER_STORAGE_KEY)
+      return savedFilter || 'all'
+    } catch (err) {
+      console.warn('Could not load filter state', err)
+      return 'all'
+    }
   }
 
-  return list
-}
+  // Función para guardar el estado del filtro
+  function saveFilterState(filter) {
+    try {
+      localStorage.setItem(FILTER_STORAGE_KEY, filter)
+    } catch (err) {
+      console.warn('Could not save filter state', err)
+    }
+  }
+
+  // --- Helpers
+  function getFiltered() {
+    // Asegurarse de que tenemos los datos más recientes del localStorage
+    const currentItems = loadState();
+    
+    // 1) aplica filtro por active/inactive
+    let list = []
+    if (currentFilter === 'all') {
+      list = currentItems;
+    } else if (currentFilter === 'active') {
+      list = currentItems.filter(i => i.active);
+    } else {
+      list = currentItems.filter(i => !i.active);
+    }
+
+    // 2) aplica filtro por término de búsqueda (si existe)
+    if (searchTerm && searchTerm.length > 0) {
+      const q = searchTerm.toLowerCase()
+      list = list.filter(i => {
+        return i.name.toLowerCase().includes(q)
+      })
+    }
+
+    return list;
+  }
 
 // listener global para recibir eventos de búsqueda desde header
 window.addEventListener('search', (e) => {
@@ -82,6 +109,7 @@ window.addEventListener('search', (e) => {
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       currentFilter = btn.dataset.filter
+      saveFilterState(currentFilter) // Guardar el estado del filtro
       updateFilterButtonStyles()
       renderGrid()
     })
@@ -118,9 +146,27 @@ window.addEventListener('search', (e) => {
     const id = Number(e.target.dataset.id)
     const item = items.find(i => i.id === id)
     if (!item) return
+    
+    // Actualizar el estado del item
     item.active = e.target.checked
+    
+    // Guardar el estado actualizado
     saveState()
-    renderGrid()
+    
+    // Si estamos en una vista filtrada, puede que necesitemos re-renderizar
+    // para mantener la consistencia con el filtro actual
+    if (currentFilter !== 'all') {
+      // Si el item ya no cumple con el filtro actual, debemos re-renderizar
+      const shouldBeVisible = 
+        (currentFilter === 'active' && item.active) ||
+        (currentFilter === 'inactive' && !item.active);
+        
+      if (!shouldBeVisible) {
+        setTimeout(() => renderGrid(), 100); // Pequeño delay para una mejor UX
+      }
+    } else {
+      renderGrid();
+    }
   })
 
   // --- Persistencia
